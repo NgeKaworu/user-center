@@ -16,6 +16,7 @@ services:
     ports:
       - ${PORT:-8010}:8000
     networks:
+      - frontend
       - backend
   user-center-go:
     build:

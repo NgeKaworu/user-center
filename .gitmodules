@@ -1,0 +1,6 @@
+[submodule "user-center-go"]
+	path = user-center-go
+	url = https://github.com/NgeKaworu/uc-golang.git
+[submodule "user-center-umi"]
+	path = user-center-umi
+	url = https://github.com/NgeKaworu/uc-react.git

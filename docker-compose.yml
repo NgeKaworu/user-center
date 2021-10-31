@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  user-center-umi:
+    build:
+      context: ./user-center-go
+      dockerfile: Dockerfile.dev
+    image: user-center-umi:dev
+    container_name: user-center-umi
+    stdin_open: true
+    tty: true
+    environment:
+      BRANCH: ${BRANCH:?err}
+    volumes:
+      - ~/.ssh:/root/.ssh
+    ports:
+      - ${PORT:-8010}:8000
+    networks:
+      - frontend
+
+    user-center-go:
+      build:
+        context: ./user-center-umi
+        dockerfile: Dockerfile.dev
+      image: user-center-go:dev
+      container_name: user-center-go
+      stdin_open: true
+      tty: true
+      environment:
+        BRANCH: ${BRANCH:-master}
+      volumes:
+        - ~/.ssh:/root/.ssh
+      networks:
+        - backend
+
+    user-center-mongo:
+      image: mongo:latest
+      container_name: user-center-mongo
+      # volumes:
+      # - ~/.ssh:/root/.ssh
+      networks:
+        - backend
+
+networks:
+  frontend:
+    name: user-center-frontend
+    driver: bridge
+  backend:
+    name: user-center-backend
+    driver: bridge

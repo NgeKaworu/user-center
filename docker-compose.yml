@@ -15,9 +15,6 @@ services:
       - ~/.ssh:/root/.ssh
     ports:
       - ${PORT:-8010}:8000
-    networks:
-      - frontend
-      - backend
   user-center-go:
     build:
       context: ./user-center-go
@@ -32,18 +29,8 @@ services:
       - ~/.ssh:/root/.ssh
     networks:
       - backend
-  user-center-mongo:
-    image: mongo:latest
-    container_name: user-center-mongo
-    # volumes:
-    # - ~/.ssh:/root/.ssh
-    networks:
-      - backend
 
 networks:
-  frontend:
-    name: user-center-frontend
-    driver: bridge
   backend:
-    name: user-center-backend
+    name: backend
     driver: bridge

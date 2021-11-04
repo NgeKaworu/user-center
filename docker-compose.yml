@@ -15,12 +15,11 @@ services:
       dockerfile: Dockerfile
     image: user-center-go
     environment:
-      BRANCH: ${BRANCH:-master}
-      ADDR: ${ADDR:-':80'}
-      DBINIT: ${DBINIT:-'false'}
-      MONGO: ${MONGO:?'MONGO url is required'}
-      DB: ${DB:'uc'}
-      K: ${K:?'iv key is required'}
+      ADDR: ${ADDR:-:80}
+      DBINIT: ${DBINIT:-false}
+      MONGO: ${MONGO:-mongodb://mongo:27017}
+      DB: ${DB:-uc}
+      K: ${K:-f3fa39nui89Wi707}
     networks:
       - backend
     depends_on:
@@ -37,7 +36,7 @@ services:
     networks:
       - backend
       - frontend
-    port:
+    ports:
       - 80:80
 
 networks:

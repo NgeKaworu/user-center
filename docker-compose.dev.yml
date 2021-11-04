@@ -26,11 +26,11 @@ services:
     tty: true
     environment:
       BRANCH: ${BRANCH:-master}
-      ADDR: ${ADDR:-':80'}
-      DBINIT: ${DBINIT:-'false'}
-      MONGO: ${MONGO:-'mongodb://mongo:27017'}
-      DB: ${DB:-'uc'}
-      K: ${K:-"f3fa39nui89Wi707"}
+      ADDR: ${ADDR:-:80}
+      DBINIT: ${DBINIT:-false}
+      MONGO: ${MONGO:-mongodb://mongo:27017}
+      DB: ${DB:-uc}
+      K: ${K:-f3fa39nui89Wi707}
     volumes:
       - ~/.ssh:/root/.ssh
     networks:

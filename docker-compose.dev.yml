@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  user-center-umi:
+    build:
+      context: user-center-umi
+      dockerfile: docker/Dockerfile.dev
+    image: user-center-umi:dev
+    container_name: user-center-umi
+    stdin_open: true
+    tty: true
+    environment:
+      BRANCH: ${BRANCH:-master}
+    volumes:
+      - ~/.ssh:/root/.ssh
+    networks:
+      - frontend
+
+  user-center-go:
+    build:
+      context: user-center-go
+      dockerfile: docker/Dockerfile.dev
+    image: user-center-go:dev
+    container_name: user-center-go
+    stdin_open: true
+    tty: true
+    environment:
+      BRANCH: ${BRANCH:-master}
+      ADDR: ${ADDR:-':80'}
+      DBINIT: ${DBINIT:-'false'}
+      MONGO: ${MONGO:-'mongodb://mongo:27017'}
+      DB: ${DB:-'uc'}
+      K: ${K:-"f3fa39nui89Wi707"}
+    volumes:
+      - ~/.ssh:/root/.ssh
+    networks:
+      - backend
+    depends_on:
+      - mongo
+
+  user-center:
+    depends_on:
+      - user-center-umi
+      - user-center-go
+    image: nginx:stable-alpine
+    container_name: user-center
+    volumes:
+      - $PWD/user-center.nginx.conf:/etc/nginx/conf.d/user-center.nginx.conf
+    networks:
+      - backend
+      - frontend
+    ports:
+      - 8001:80
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+  frontend:
+    name: frontend
+    driver: bridge

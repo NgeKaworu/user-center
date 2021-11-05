@@ -1,14 +1,14 @@
 version: "3.9"
 
 services:
-  # user-center-umi:
-  #   restart: "always"
-  #   build:
-  #     context: ./user-center-umi
-  #     dockerfile: docker/Dockerfile
-  #   image: user-center-umi
-  #   networks:
-  #     - frontend
+  user-center-umi:
+    restart: "always"
+    build:
+      context: ./user-center-umi
+      dockerfile: docker/Dockerfile
+    image: user-center-umi
+    networks:
+      - frontend
 
   user-center-go:
     restart: "always"

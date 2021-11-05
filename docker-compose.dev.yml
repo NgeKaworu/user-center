@@ -6,7 +6,7 @@ services:
       context: user-center-umi
       dockerfile: docker/Dockerfile.dev
     image: user-center-umi:dev
-    container_name: user-center-umi
+    container_name: user-center-umi-dev
     stdin_open: true
     tty: true
     environment:
@@ -23,7 +23,7 @@ services:
       context: user-center-go
       dockerfile: docker/Dockerfile.dev
     image: user-center-go:dev
-    container_name: user-center-go
+    container_name: user-center-go-dev
     stdin_open: true
     tty: true
     environment:

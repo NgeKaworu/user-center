@@ -1,45 +1,49 @@
 version: "3.9"
 
 services:
-  user-center-umi:
-    build:
-      context: ./user-center-umi
-      dockerfile: Dockerfile
-    image: user-center-umi
-    environment:
-      BRANCH: ${BRANCH:-master}
+  # user-center-umi:
+  #   restart: "always"
+  #   build:
+  #     context: ./user-center-umi
+  #     dockerfile: docker/Dockerfile
+  #   image: user-center-umi
+  #   networks:
+  #     - frontend
 
   user-center-go:
+    restart: "always"
     build:
       context: ./user-center-go
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
     image: user-center-go
     environment:
       ADDR: ${ADDR:-:80}
       DBINIT: ${DBINIT:-false}
-      MONGO: ${MONGO:-mongodb://mongo:27017}
+      MONGO: ${MONGO:?mongo url is required}
       DB: ${DB:-uc}
-      K: ${K:-f3fa39nui89Wi707}
+      K: ${K:?iv key is required}
     networks:
       - backend
     depends_on:
       - mongo
 
   user-center:
-    image: nginx:stable-alpine
-    container_name: user-center
-    depends_on:
-      - user-center-umi
-      - user-center-go
-    volumes:
-      - $PWD/user-center.nginx.conf:/etc/nginx/conf.d/
+    restart: "always"
+    image: user-center-route
+    container_name: user-center-route
+    build:
+      context: .
+      dockerfile: Dockerfile
     networks:
-      - backend
       - frontend
+      - backend
     ports:
-      - 80:80
+      - 8001:80
 
 networks:
   backend:
     name: backend
+    driver: bridge
+  frontend:
+    name: frontend
     driver: bridge

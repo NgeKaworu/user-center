@@ -27,19 +27,6 @@ services:
     depends_on:
       - mongo
 
-  user-center:
-    restart: "always"
-    image: user-center-route
-    container_name: user-center-route
-    build:
-      context: .
-      dockerfile: Dockerfile
-    networks:
-      - frontend
-      - backend
-    ports:
-      - 8001:80
-
 networks:
   backend:
     name: backend

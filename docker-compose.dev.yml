@@ -31,7 +31,7 @@ services:
       ADDR: ${ADDR:-:80}
       DBINIT: ${DBINIT:-false}
       MONGO: ${MONGO:-mongodb://mongo:27017}
-      DB: ${DB:-uc}
+      DB: ${DB:-user-center}
       K: ${K:-f3fa39nui89Wi707}
     volumes:
       - ~/.ssh:/root/.ssh

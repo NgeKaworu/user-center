@@ -6,7 +6,7 @@ services:
     build:
       context: ./user-center-umi
       dockerfile: docker/Dockerfile
-    image: user-center-umi
+    image: ngekaworu/user-center-umi
     container_name: user-center-umi
     networks:
       - frontend
@@ -16,7 +16,7 @@ services:
     build:
       context: ./user-center-go
       dockerfile: docker/Dockerfile
-    image: user-center-go
+    image: ngekaworu/user-center-go
     container_name: user-center-go
     environment:
       ADDR: ${ADDR:-:80}

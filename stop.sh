@@ -22,4 +22,4 @@ do
 done
 echo "done"
 
-docker compose -f ./docker-compose${filePath}.yml --env-file ~/.env -p user-center${suffix} down -v;
+docker compose -f ./docker-compose${filePath}.yml --env-file ~/.env -p user-center${suffix} stop;

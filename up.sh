@@ -13,6 +13,11 @@ do
             filePath=.dev
             suffix=-dev
         ;;
+        -b)
+            echo "rebuild..."
+            # echo "-b 选项的参数值是：$2"
+            build=true
+        ;;
         *)
             echo "$1 is not an option"
             shift
@@ -22,4 +27,4 @@ do
 done
 echo "done"
 
-docker compose -f ./docker-compose${filePath}.yml --env-file ~/.env -p user-center${suffix} down -v;
+docker compose -f ./docker-compose${filePath}.yml --env-file ~/.env -p user-center${suffix} up -d --build=${build};

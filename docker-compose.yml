@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   user-center-umi:
-    
+    restart: "always"
     build:
       context: ./user-center-umi
       dockerfile: docker/Dockerfile
@@ -12,7 +12,7 @@ services:
       - frontend
 
   user-center-go:
-    
+    restart: "always"
     build:
       context: ./user-center-go
       dockerfile: docker/Dockerfile

@@ -1,6 +1,6 @@
 [submodule "user-center-go"]
 	path = user-center-go
-	url = git@github.com:NgeKaworu/user-center-go.git
+	url = git@github.com:yingxv/user-center-go.git
 [submodule "user-center-umi"]
 	path = user-center-umi
-	url = git@github.com:NgeKaworu/user-center-umi.git
+	url = git@github.com:yingxv/user-center-umi.git

@@ -34,6 +34,7 @@ services:
       REDIS: ${REDIS:?redis url is required}
       DB: ${DB:-user-center}
       K: ${K:-f3fa39nui89Wi707}
+      D: ${D:?email pwd is required}
     volumes:
       - ~/.ssh:/root/.ssh
     networks:

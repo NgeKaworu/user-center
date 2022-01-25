@@ -25,6 +25,7 @@ services:
       REDIS: ${REDIS:?redis url is required}
       DB: ${DB:-user-center}
       K: ${K:?iv key is required}
+      D: ${D:?email pwd is required}
     networks:
       - backend
     depends_on:
